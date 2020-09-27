@@ -1,0 +1,109 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.myOption{
+  widows: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.space-carousel {
+  padding: 16px;
+  background: #DEF1E5;
+  overflow: hidden;
+}
+
+.sub-title {
+  color: #888;
+  font-size: 14px;
+  padding: 15px 0 9px 15px;
+}
+.not-square-grid .am-grid-icon {
+  width: 40px;
+  height: 60px;
+}
+
+.am-search {
+  border-bottom: 1px solid #ddd;
+}
+.sub-title {
+  color: #888;
+  font-size: 14px;
+  padding: 30px 0 18px 0;
+}
+
+.sc-example {
+  padding-bottom: 13px;
+}
+.sub-title {
+  color: #888;
+  font-size: 14px;
+  padding: 30px 0 18px 0;
+    margin: 0;
+}
+
+.foo-menu {
+  position: relative;
+  z-index: 1000 !important;
+}
+
+.menu-active .top-nav-bar{
+  z-index: 80;
+}
+
+.top-nav-bar {
+  position: relative;
+  background-color: #008AE6;
+  color: #FFF;
+}
+.am-navbar-title {
+  color: #FFF!important;
+}
+.menu-mask {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.4;
+  z-index: 79;
+}

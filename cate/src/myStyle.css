@@ -1,0 +1,53 @@
+.my-drawer {
+    position: relative;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .my-drawer .am-drawer-sidebar {
+    background-color: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .my-drawer .am-drawer-sidebar .am-list {
+    width: 300px;
+    padding: 0;
+  }
+
+
+  .foo-menu {
+    position: relative;
+    z-index: 1000 !important;
+  }
+  
+  .menu-active .top-nav-bar{
+    z-index: 80;
+  }
+  
+  .top-nav-bar {
+    position: relative;
+    background-color: #008AE6;
+    color: #FFF;
+  }
+  .am-navbar-title {
+    color: #FFF!important;
+  }
+  .menu-mask {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.4;
+    z-index: 79;
+  }
+  #tab-bar.demo {
+    display: flex;
+    flex-direction: column;
+  }
+  #tab-bar .demoName {
+    height: 40px;
+  }
+  #tab-bar .demo-preview-item .am-tab-bar {
+    background-color: white;
+  }
