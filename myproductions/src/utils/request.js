@@ -44,9 +44,7 @@ instance.interceptors.response.use(function (response) {
 
 export function get(url,param){
 
-    return instance.get(url,{
-        param
-    })
+    return instance.get(url,param)
 }
 
 export function post(url,data){
@@ -65,5 +63,5 @@ export function put(url,data){
 
 export function del(url){
 
-    return instance.del(url)
+    return instance.delete(url)
 }

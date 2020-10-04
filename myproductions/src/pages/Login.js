@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Input, Button, Checkbox, Card, message } from 'antd';
-import './login.css'
+import '../assets/css/login.css'
 import {setToken} from '../utils/auth'
 import {loginApi} from '../service/auth'
 

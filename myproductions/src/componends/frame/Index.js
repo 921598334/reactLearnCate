@@ -1,17 +1,17 @@
 import React from 'react'
-import { Layout, Menu, Breadcrumb, Dropdown,message } from 'antd';
+import { Layout, Menu, Breadcrumb, Dropdown, message, Badge } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import '../../statics/css/myFrameCss.css'
-import logBack from '../img/logoBakc.png'
+import '../../assets/css/myFrameCss.css'
+import logBack from  '../../assets/img/logoBakc.png'
 import { adminRouter } from '../../routes/Index'
 import { withRouter } from 'react-router-dom'
 import {
     DownOutlined,
     SmileOutlined
 } from '@ant-design/icons';
-import './frame.css'
-import {clearToken} from '../../utils/auth'
+import '../../assets/css/frame.css'
+import { clearToken } from '../../utils/auth'
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -24,24 +24,27 @@ const routers = adminRouter.filter(route => route.isShow)
 
 
 
-
-
 function MyLayout(props) {
 
 
 
     const menu = (
-        <Menu onClick={(p)=>{
-            if(p.key==="logout"){
+        <Menu onClick={(p) => {
+            if (p.key === "logout") {
                 clearToken()
-                props.history.push('./login')
-            }else{
+                props.history.push('./logout')
+            } else {
                 message.info(p.key);
+
+                if (p.key == "notify") {
+                    props.history.push('/admin/notify')
+                }
+
             }
         }}>
             <Menu.Item key="notify">
                 <a >
-                    通知中心
+                    通知中心<Badge dot></Badge>
                 </a>
             </Menu.Item>
             <Menu.Item key="setting">
@@ -54,16 +57,16 @@ function MyLayout(props) {
                     推出
             </a>
             </Menu.Item>
-    
+
         </Menu>
     );
-    
 
 
 
 
 
-    
+
+
 
     return (
         <div>
@@ -72,15 +75,16 @@ function MyLayout(props) {
                     <div className="logo" style={{ width: "100%" }}>
 
                         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{ width: "100%" }}  >
-                            <img src={logBack} style={{ height: "64px",float:"left" }} />
+                            <img src={logBack} style={{ height: "64px", float: "left" }} />
 
-                            <div style={{float:"right"}} >
+                            <div style={{ float: "right" }} >
                                 <SmileOutlined />
                                 <Dropdown overlay={menu}>
 
                                     <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                                        Hover me <DownOutlined />
+                                        管理员<DownOutlined />
                                     </a>
+                                    
                                 </Dropdown>
                             </div>
 

@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Table, Button, Popconfirm, message, Pagination } from 'antd'
-import { listApi } from '../../../service/production'
+import { listApi, delApi, modifyApi } from '../../../service/production'
 
-function confirm(e) {
-    console.log(e);
-    message.success('Click on Yes');
-}
+
 
 function cancel(e) {
     console.log(e);
-    message.error('Click on No');
+    // message.error('Click on No');
 }
 
 
@@ -19,22 +16,64 @@ class List extends React.Component {
         super(props)
         this.state = {
             dataSource: [],
-            total: 0
+            total: 0,
+            page:1,
+            per:2
         }
     }
 
 
 
     componentWillMount() {
-        listApi().then(res => {
+
+        console.log("开始挂在")
+
+        listApi(this.state.page,this.state.per).then(res => {
+
             console.log(res)
             this.setState({ dataSource: res.products })
-            this.setState({ totals: res.totals })
+            this.setState({ totals: res.totalCount })
             console.log("读取数据完毕")
-          
+
+        }).catch(err => {
+
+            console.log("出现异常")
+            let str = err + ""
+            console.log(str.indexOf("401") == -1)
+
+            message.error("登录信息过期,跳转到登录界面")
+            this.props.history.push("/login")
+
         })
-        
+
     }
+
+
+
+
+    //选择的页面改变时
+    loadData = page => {
+
+        this.setState({page:page})
+
+        //不知道为什么应该只返回当前也的数据，但是现在是全部返回，分页控件需要传入的也是全部数据
+        listApi(this.state.page,this.state.per).then(res => {
+
+            console.log(res)
+
+            this.setState({ dataSource: res.products })
+            this.setState({ totals: res.totalCount })
+            console.log("读取数据完毕")
+
+        }).catch(err => {
+
+            console.log("出现异常,跳转到登录界面")
+            this.props.history.push("/login")
+
+        })
+
+    }
+
 
     columns = [
         {
@@ -56,6 +95,14 @@ class List extends React.Component {
             key: 'price',
             align: "center",
         },
+       
+        {
+            title: '是否在售',
+            dataIndex: 'onSale',
+            key: 'onSale',
+            align: "center",
+            render: (txt, record, index) => (record.onSale ? "在售" : "售罄")
+        },
         {
             title: '操作',
             align: "center",
@@ -73,7 +120,17 @@ class List extends React.Component {
 
                         <Popconfirm
                             title="你确定要删除吗?"
-                            onConfirm={confirm}
+
+                            // 一定记住onCofirm一定得使用箭头函数，不然会导致全部表格表单得数据加载
+                            onConfirm={() => {
+
+                                delApi(record._id).then(res => {
+                                    console.log("删除完成")
+                                    //需要重新从数据库中得到数据，而不能直接做让页面跳转到当前页面
+                                    this.loadData(1)
+                                })
+
+                            }}
                             onCancel={cancel}
                             okText="Yes"
                             cancelText="No"
@@ -81,27 +138,25 @@ class List extends React.Component {
                             <Button type="danger">删除</Button>
                         </Popconfirm>,
 
+
+
+                        <Button style={{ margin: "0 1rem" }} type="primary" onClick={() => {
+                            console.log("修改上下价")
+                           
+                            //可以通过这种方式来传入参数
+                            modifyApi(record._id, { onSale: !record.onSale }).then(res => {
+                                this.loadData(1)
+                            })
+
+
+                        }}>{record.onSale ? "下架" : "上价"}</Button>
+
                     </div>
 
                 )
             }
         },
     ];
-
-
-
-
-
-    //选择的页面改变时
-    loadData = page => {
-        console.log(page)
-        listApi(page).then(res => {
-            console.log(res)
-            this.setState({ dataSource: res.products })
-            this.setState({ totals: res.totals })
-        })
-
-    }
 
 
 

@@ -3,7 +3,7 @@ import List from '../pages/admin/productions/List'
 import Index from '../pages/admin/dashboard/Index'
 import Login from '../pages/Login'
 import PageNotFound from '../pages/PageNotFound'
-
+import Notify from '../pages/admin/notify/Notify'
 import 'antd/dist/antd.css';
 import React from 'react'
 import {
@@ -59,9 +59,17 @@ export const adminRouter = [{
     path: "/404",
     component: PageNotFound,
     exact: true,
-    isShow: true,
+    isShow: false,
     title: "没有找到"
+},
+{
+    path: "/admin/notify",
+    component: Notify,
+    exact: true,
+    isShow: false,
+    title: "通知"
 }
 
 ]
+
 

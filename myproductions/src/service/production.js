@@ -1,6 +1,10 @@
 import {get ,post ,del ,put} from '../utils/request'
 
-export function listApi(page=1,per=2){
+export function listApi(page,per){
+
+    console.log("(listApi)page:"+page)
+    console.log("(listApi)per:"+per)
+    
     return get('/api/v1/admin/products',{page,per})
 }
 
@@ -13,8 +17,8 @@ export function modifyApi(id,data){
     return put('/api/v1/admin/products/'+id,data)
 }
 
-export function delApi(id,data){
-    return del('/api/v1/admin/products/${id}',data)
+export function delApi(id){
+    return del('/api/v1/admin/products/'+id)
 }
 
 export function getOneById(id){
